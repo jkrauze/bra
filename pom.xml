@@ -12,6 +12,7 @@
     <description>Simple web controller which allows to execute many different request with optional JSON body in one
         HTTP request.
     </description>
+    <url>https://github.com/jkrauze/bra</url>
 
     <developers>
         <developer>
