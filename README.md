@@ -220,7 +220,7 @@ Content-Type: application/json;charset=UTF-8
 ]
 ```
 
-After that, he wants to change the name of 5 items. The only way is to make 5 requests to `PUT /items/{id}` endpoint.
+After that, he wants to change the names of 5 items. The only way to do this is to make 5 requests to `PUT /items/{id}` endpoint.
 
 ```javascript
 PUT /items/5
@@ -240,7 +240,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-Finally, he wants to delete 3 of them. As before, the only way is to make 3 requests to `DELETE /items/{id}` endpoint.
+Finally, he wants to delete 3 of them. As before, there is no other way than making 3 requests to `DELETE /items/{id}` endpoint.
 
 ```javascript
 DELETE /items/15
