@@ -28,7 +28,7 @@ public class MyApplication {
 
 Your API should have the Batch Request API endpoint now at `POST /bra-v0`.
 
-```JSON
+```javascript
 POST /bra-v0
 
 [
@@ -155,52 +155,17 @@ Content-Type: application/json;charset=UTF-8
 ]
 ```
 
+## Benchmarks
+
+Batch Request API benchmarks can be found [here](https://github.com/jkrauze/bra-sample/blob/master/README.md).
+
 ## Getting started
 
-Let's suppose you have a REST API implemented using Spring WebFlux.
-
-```java
-@RestController
-@RequestMapping(path = "/items")
-public class SampleController {
-
-    private SampleService service;
-
-    public SampleController(SampleService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public Mono<SampleResource> create(@RequestBody Mono<SampleResource> request) {
-        return request.flatMap(service::create);
-    }
-
-    @GetMapping
-    public Flux<SampleResource> list() {
-        return service.list();
-    }
-
-    @GetMapping(path = "/{id}")
-    public Mono<SampleResource> get(@PathVariable("id") Long id) {
-        return service.get(id);
-    }
-
-    @PutMapping(path = "/{id}")
-    public Mono<SampleResource> update(@PathVariable Long id, @RequestBody Mono<SampleResource> request) {
-        return request.flatMap(resource -> service.update(id, resource));
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public Mono<Void> delete(@PathVariable Long id) {
-        return Mono.just(id).flatMap(service::delete);
-    }
-
-}
-```
+Let's suppose you have a [REST API implemented using Spring WebFlux](https://github.com/jkrauze/bra-sample/blob/master/src/main/java/io/github/jkrauze/sample/bra/SampleController.java).
 
 Suppose a consumer wants to create 15 items. He must make 15 separate `POST /items` request.
 
-```JSON
+```javascript
 POST /items
 
 {
@@ -220,7 +185,7 @@ Content-Type: application/json;charset=UTF-8
 
 Now, he wants to get 10 items with ids from 4 to 13. He can make 10 separate HTTP request to `GET /items/{id}` endpoint or get a collection of all items from `GET /items` which will return more items than requested.
 
-```JSON
+```javascript
 GET /items/4
 
 ---
@@ -234,7 +199,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-```JSON
+```javascript
 GET /items
 
 ---
@@ -257,7 +222,7 @@ Content-Type: application/json;charset=UTF-8
 
 After that, he wants to change the name of 5 items. The only way is to make 5 requests to `PUT /items/{id}` endpoint.
 
-```JSON
+```javascript
 PUT /items/5
 
 {
@@ -277,7 +242,7 @@ Content-Type: application/json;charset=UTF-8
 
 Finally, he wants to delete 3 of them. As before, the only way is to make 3 requests to `DELETE /items/{id}` endpoint.
 
-```JSON
+```javascript
 DELETE /items/15
 
 ---
@@ -289,7 +254,7 @@ To execute these operations consumer had to make 15 + 10 + 5 + 3 = 33 requests.
 
 
 Now, he can make all of these operations in one HTTP request.
-```JSON
+```javascript
 POST /bra-v0
 
 [
