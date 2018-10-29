@@ -265,7 +265,7 @@ POST /bra-v0
 			"name":"Hello world!"
 		}
 	},
-  ...
+	...
 	{
 		"method":"POST",
 		"path":"/items",
@@ -277,7 +277,7 @@ POST /bra-v0
 		"method":"GET",
 		"path":"/items/4"
 	},
-  ...
+	...
 	{
 		"method":"GET",
 		"path":"/items/13"
